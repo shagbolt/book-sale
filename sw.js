@@ -1,10 +1,15 @@
 // Book Sale Checkout offline cache.
 // Change the version number whenever index.html is updated.
-const CACHE = 'book-sale-v9';
+const CACHE = 'book-sale-v11';
 const CORE = ['./', './index.html'];
 
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE).then(c => c.addAll(CORE)).then(() => self.skipWaiting()));
+  // fetch fresh copies, skipping the browser's own HTTP cache
+  e.waitUntil(
+    caches.open(CACHE)
+      .then(c => c.addAll(CORE.map(u => new Request(u, { cache: 'reload' }))))
+      .then(() => self.skipWaiting())
+  );
 });
 
 self.addEventListener('activate', e => {
