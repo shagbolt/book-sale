@@ -1,6 +1,6 @@
 // Book Sale Checkout offline cache.
 // Change the version number whenever index.html is updated.
-const CACHE = 'book-sale-v8';
+const CACHE = 'book-sale-v9';
 const CORE = ['./', './index.html'];
 
 self.addEventListener('install', e => {
